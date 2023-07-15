@@ -44,8 +44,9 @@ Para conseguimos rodar o código precisamos instalar as blibiotecas, primeiro en
 Depois de ter feito isso, digite os seguintes comandos (na pespectiva ordem) no terminal:
 
 ```bash
+npm install
 npm run build:css
-# Esse primeiro comando só é necessario na primeira vez que você for abrir.
+# Esse primeiro e segundo comando só é necessario na primeira vez que você for abrir.
 npm start
 ```
 
