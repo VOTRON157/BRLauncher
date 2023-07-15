@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../services/css/style.css">
+    <title>Minecraft Launcher</title>
+</head>
+
+<body>
+    <main class="flex" style="background: url(../assets/wallpaper.jpg) no-repeat; background-size: cover;">
+        <aside class="flex flex-col w-52 h-screen bg-zinc-500 bg-opacity-50">
+            <nav class="flex flex-col gap-y-2">
+                <div class="mt-2 p-2 text-white">
+                    <p class="text-sm">LAUNCHER</p>
+                    <hr>
+                </div>
+                <a href="#">
+                    <div
+                        class="group p-2 flex items-center text-white duration-500 hover:bg-neutral-300 hover:bg-opacity-50 hover:text-black">
+                        <div>
+                            <img src="../assets/logo.ico" class="w-9 group-hover:scale-110 duration-500">
+                        </div>
+                        <p class="ml-3">Configurações</p>
+                    </div>
+                </a>
+                <a onclick="window.close()" href="#">
+                    <div
+                        class="group p-2 flex items-center text-white duration-500 hover:bg-neutral-300 hover:bg-opacity-50 hover:text-black">
+                        <div>
+                            <img src="../assets/tnt.png" class="w-9 group-hover:scale-110 duration-500">
+                        </div>
+                        <p class="ml-3">Fechar</p>
+                    </div>
+                </a>
+                <div class="mt-2 p-2 text-white">
+                    <p class="text-sm">CONTA</p>
+                    <hr>
+                </div>
+                <a href="#">
+                    <div
+                        class="group p-2 flex items-center text-white duration-500 hover:bg-neutral-300 hover:bg-opacity-50 hover:text-black">
+                        <div>
+                            <img src="../assets/steve.png" class="w-9 group-hover:scale-110 duration-500">
+                        </div>
+                        <p class="ml-3">Trocar</p>
+                    </div>
+                </a>
+            </nav>
+        </aside>
+        <div class="w-full bg-zinc-600 bg-opacity-50">
+            <div class="flex justify-between h-3/4">
+                <div class="h-fit inline-block self-end">
+                    <label class="block text-white" for="block">Versão</label>
+                    <select id="version">
+                        
+                            <option value="1.20.1">
+                                1.20.1 Vanilla
+                            </option>
+                        
+                            <option value="1.20">
+                                1.20 Vanilla
+                            </option>
+                        
+                            <option value="1.19.4">
+                                1.19.4 Vanilla
+                            </option>
+                        
+                            <option value="1.19.3">
+                                1.19.3 Vanilla
+                            </option>
+                        
+                            <option value="1.19.2">
+                                1.19.2 Vanilla
+                            </option>
+                        
+                            <option value="1.19.1">
+                                1.19.1 Vanilla
+                            </option>
+                        
+                            <option value="1.19">
+                                1.19 Vanilla
+                            </option>
+                        
+                            <option value="1.18.2">
+                                1.18.2 Vanilla
+                            </option>
+                        
+                            <option value="1.18.1">
+                                1.18.1 Vanilla
+                            </option>
+                        
+                            <option value="1.18">
+                                1.18 Vanilla
+                            </option>
+                        
+                            <option value="1.17.1">
+                                1.17.1 Vanilla
+                            </option>
+                        
+                            <option value="1.17">
+                                1.17 Vanilla
+                            </option>
+                        
+                            <option value="1.16.5">
+                                1.16.5 Vanilla
+                            </option>
+                        
+                            <option value="1.16.4">
+                                1.16.4 Vanilla
+                            </option>
+                        
+                            <option value="1.16.3">
+                                1.16.3 Vanilla
+                            </option>
+                        
+                            <option value="1.16.2">
+                                1.16.2 Vanilla
+                            </option>
+                        
+                            <option value="1.16.1">
+                                1.16.1 Vanilla
+                            </option>
+                        
+                            <option value="1.16">
+                                1.16 Vanilla
+                            </option>
+                        
+                            <option value="1.15.2">
+                                1.15.2 Vanilla
+                            </option>
+                        
+                            <option value="1.15.1">
+                                1.15.1 Vanilla
+                            </option>
+                        
+                            <option value="1.15">
+                                1.15 Vanilla
+                            </option>
+                        
+                            <option value="1.14.4">
+                                1.14.4 Vanilla
+                            </option>
+                        
+                            <option value="1.14.3">
+                                1.14.3 Vanilla
+                            </option>
+                        
+                            <option value="1.14.2">
+                                1.14.2 Vanilla
+                            </option>
+                        
+                            <option value="1.14.1">
+                                1.14.1 Vanilla
+                            </option>
+                        
+                            <option value="1.14">
+                                1.14 Vanilla
+                            </option>
+                        
+                            <option value="1.13.2">
+                                1.13.2 Vanilla
+                            </option>
+                        
+                            <option value="1.13.1">
+                                1.13.1 Vanilla
+                            </option>
+                        
+                            <option value="1.13">
+                                1.13 Vanilla
+                            </option>
+                        
+                            <option value="1.12.2">
+                                1.12.2 Vanilla
+                            </option>
+                        
+                            <option value="1.12.1">
+                                1.12.1 Vanilla
+                            </option>
+                        
+                            <option value="1.12">
+                                1.12 Vanilla
+                            </option>
+                        
+                            <option value="1.11.2">
+                                1.11.2 Vanilla
+                            </option>
+                        
+                            <option value="1.11.1">
+                                1.11.1 Vanilla
+                            </option>
+                        
+                            <option value="1.11">
+                                1.11 Vanilla
+                            </option>
+                        
+                            <option value="1.10.2">
+                                1.10.2 Vanilla
+                            </option>
+                        
+                            <option value="1.10.1">
+                                1.10.1 Vanilla
+                            </option>
+                        
+                            <option value="1.10">
+                                1.10 Vanilla
+                            </option>
+                        
+                            <option value="1.9.4">
+                                1.9.4 Vanilla
+                            </option>
+                        
+                            <option value="1.9.3">
+                                1.9.3 Vanilla
+                            </option>
+                        
+                            <option value="1.9.2">
+                                1.9.2 Vanilla
+                            </option>
+                        
+                            <option value="1.9.1">
+                                1.9.1 Vanilla
+                            </option>
+                        
+                            <option value="1.9">
+                                1.9 Vanilla
+                            </option>
+                        
+                            <option value="1.8.9">
+                                1.8.9 Vanilla
+                            </option>
+                        
+                            <option value="1.8.8">
+                                1.8.8 Vanilla
+                            </option>
+                        
+                            <option value="1.8.7">
+                                1.8.7 Vanilla
+                            </option>
+                        
+                            <option value="1.8.6">
+                                1.8.6 Vanilla
+                            </option>
+                        
+                            <option value="1.8.5">
+                                1.8.5 Vanilla
+                            </option>
+                        
+                            <option value="1.8.4">
+                                1.8.4 Vanilla
+                            </option>
+                        
+                            <option value="1.8.3">
+                                1.8.3 Vanilla
+                            </option>
+                        
+                            <option value="1.8.2">
+                                1.8.2 Vanilla
+                            </option>
+                        
+                            <option value="1.8.1">
+                                1.8.1 Vanilla
+                            </option>
+                        
+                            <option value="1.8">
+                                1.8 Vanilla
+                            </option>
+                        
+                            <option value="1.7.10">
+                                1.7.10 Vanilla
+                            </option>
+                        
+                            <option value="1.7.9">
+                                1.7.9 Vanilla
+                            </option>
+                        
+                            <option value="1.7.8">
+                                1.7.8 Vanilla
+                            </option>
+                        
+                            <option value="1.7.7">
+                                1.7.7 Vanilla
+                            </option>
+                        
+                            <option value="1.7.6">
+                                1.7.6 Vanilla
+                            </option>
+                        
+                            <option value="1.7.5">
+                                1.7.5 Vanilla
+                            </option>
+                        
+                            <option value="1.7.4">
+                                1.7.4 Vanilla
+                            </option>
+                        
+                            <option value="1.7.3">
+                                1.7.3 Vanilla
+                            </option>
+                        
+                            <option value="1.7.2">
+                                1.7.2 Vanilla
+                            </option>
+                        
+                            <option value="1.6.4">
+                                1.6.4 Vanilla
+                            </option>
+                        
+                            <option value="1.6.2">
+                                1.6.2 Vanilla
+                            </option>
+                        
+                            <option value="1.6.1">
+                                1.6.1 Vanilla
+                            </option>
+                        
+                            <option value="1.5.2">
+                                1.5.2 Vanilla
+                            </option>
+                        
+                            <option value="1.5.1">
+                                1.5.1 Vanilla
+                            </option>
+                        
+                            <option value="1.4.7">
+                                1.4.7 Vanilla
+                            </option>
+                        
+                            <option value="1.4.5">
+                                1.4.5 Vanilla
+                            </option>
+                        
+                            <option value="1.4.6">
+                                1.4.6 Vanilla
+                            </option>
+                        
+                            <option value="1.4.4">
+                                1.4.4 Vanilla
+                            </option>
+                        
+                            <option value="1.4.2">
+                                1.4.2 Vanilla
+                            </option>
+                        
+                            <option value="1.3.2">
+                                1.3.2 Vanilla
+                            </option>
+                        
+                            <option value="1.3.1">
+                                1.3.1 Vanilla
+                            </option>
+                        
+                            <option value="1.2.5">
+                                1.2.5 Vanilla
+                            </option>
+                        
+                            <option value="1.2.4">
+                                1.2.4 Vanilla
+                            </option>
+                        
+                            <option value="1.2.3">
+                                1.2.3 Vanilla
+                            </option>
+                        
+                            <option value="1.2.2">
+                                1.2.2 Vanilla
+                            </option>
+                        
+                            <option value="1.2.1">
+                                1.2.1 Vanilla
+                            </option>
+                        
+                            <option value="1.1">
+                                1.1 Vanilla
+                            </option>
+                        
+                            <option value="1.0">
+                                1.0 Vanilla
+                            </option>
+                        
+                    </select>
+                </div>
+                <div class="h-fit inline-block self-end">
+                    <button id="play" class="bg-gradient-to-br from-blue-500 to-blue-700 px-5 py-2 rounded hover:ring-4 ring-blue-400 duration-500 text-white">Instalar e Jogar</button>
+                </div>
+                <div class="h-fit inline-block self-end">
+                    <label for="name" class="block text-white">Nome do perfil</label>
+                    <input type="text" id="name" placeholder="Player">
+                </div>
+            </div>
+            <div class="h-1/4 bg-zinc-950 bg-opacity-40 text-red-500 flex flex-col">
+                <label for="console">Console</label>
+                <hr>
+                <div id="logs" class="h-full overflow-y-scroll overflow-x-hidden">Os logs aparecerão aqui...</div>
+            </div>
+        </div>
+    </main>
+    <script>var exports = {};</script>
+    <script src="../services/launcher.js"></script>
+</body>
+
+</html>

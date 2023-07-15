@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../services/css/style.css">
+    <title>Minecraft Launcher</title>
+</head>
+
+<body>
+    <main class="flex" style="background: url(../assets/wallpaper.jpg) no-repeat; background-size: cover;">
+        <aside class="flex flex-col w-52 h-screen bg-zinc-500 bg-opacity-50">
+            <nav class="flex flex-col gap-y-2">
+                <div class="mt-2 p-2 text-white">
+                    <p class="text-sm">LAUNCHER</p>
+                    <hr>
+                </div>
+                <a href="#">
+                    <div
+                        class="group p-2 flex items-center text-white duration-500 hover:bg-neutral-300 hover:bg-opacity-50 hover:text-black">
+                        <div>
+                            <img src="../assets/logo.ico" class="w-9 group-hover:scale-110 duration-500">
+                        </div>
+                        <p class="ml-3">Configurações</p>
+                    </div>
+                </a>
+                <a onclick="window.close()" href="#">
+                    <div
+                        class="group p-2 flex items-center text-white duration-500 hover:bg-neutral-300 hover:bg-opacity-50 hover:text-black">
+                        <div>
+                            <img src="../assets/tnt.png" class="w-9 group-hover:scale-110 duration-500">
+                        </div>
+                        <p class="ml-3">Fechar</p>
+                    </div>
+                </a>
+                <div class="mt-2 p-2 text-white">
+                    <p class="text-sm">CONTA</p>
+                    <hr>
+                </div>
+                <a href="#">
+                    <div
+                        class="group p-2 flex items-center text-white duration-500 hover:bg-neutral-300 hover:bg-opacity-50 hover:text-black">
+                        <div>
+                            <img src="../assets/steve.png" class="w-9 group-hover:scale-110 duration-500">
+                        </div>
+                        <p class="ml-3">Trocar</p>
+                    </div>
+                </a>
+            </nav>
+        </aside>
+        <div class="w-full bg-zinc-600 bg-opacity-50">
+            <div class="flex justify-between h-3/4">
+                <div class="h-fit inline-block self-end">
+                    <label class="block text-white" for="block">Versão</label>
+                    <select id="version">
+                        <% for(let version of versions) { %>
+                            <option value="<%= version.id %>">
+                                <%= version.id %> Vanilla
+                            </option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="h-fit inline-block self-end">
+                    <button id="play" class="bg-gradient-to-br from-blue-500 to-blue-700 px-5 py-2 rounded hover:ring-4 ring-blue-400 duration-500 text-white">Instalar e Jogar</button>
+                </div>
+                <div class="h-fit inline-block self-end">
+                    <label for="name" class="block text-white">Nome do perfil</label>
+                    <input type="text" id="name" placeholder="Player">
+                </div>
+            </div>
+            <div class="h-1/4 bg-zinc-950 bg-opacity-40 text-red-500 flex flex-col">
+                <label for="console">Console</label>
+                <hr>
+                <div id="logs" class="h-full overflow-y-scroll overflow-x-hidden">Os logs aparecerão aqui...</div>
+            </div>
+        </div>
+    </main>
+    <script>var exports = {};</script>
+    <script src="../services/launcher.js"></script>
+</body>
+
+</html>
