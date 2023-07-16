@@ -34,7 +34,7 @@ function createWindow() {
     });
     win.loadFile((0, path_1.join)(views, "index.html"));
     win.removeMenu();
-    // win.webContents.openDevTools()
+    win.webContents.openDevTools();
     new electron_1.Notification({
         icon: (0, path_1.join)(__dirname, "assets/logo.ico"),
         title: "Minecraft Launcher",
@@ -56,10 +56,6 @@ electron_1.ipcMain.handle('startDownload', (event, ...args) => __awaiter(void 0,
         body: "O Minecraft está sendo baixado, quando tudo for concluido avisaremos."
     }).show();
 }));
-process.on("unhandledRejection", (reason) => {
-    if (reason.message.includes("connection closed"))
-        return 0;
-});
 electron_1.ipcMain.handle("stopPlaying", () => {
     discord_client.disconnect();
 });
@@ -74,7 +70,7 @@ electron_1.ipcMain.handle("playing", (event, version) => {
 });
 electron_1.app.whenReady().then(() => {
     if (process.platform === 'win32') {
-        electron_1.app.setAppUserModelId(electron_1.app.name);
+        electron_1.app.setAppUserModelId("BRLauncher");
     }
     createWindow();
     electron_1.app.on('activate', () => {

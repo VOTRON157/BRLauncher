@@ -23,7 +23,7 @@ function createWindow() {
 
   win.loadFile(join(views, "index.html"))
   win.removeMenu()
-  // win.webContents.openDevTools()
+  win.webContents.openDevTools()
 
   new Notification({
     icon: join(__dirname, "assets/logo.ico"),
@@ -51,10 +51,6 @@ ipcMain.handle('startDownload', async (event, ...args) => {
   }).show()
 })
 
-process.on("unhandledRejection", (reason: any) => {
-  if(reason.message.includes("connection closed")) return 0;
-})
-
 ipcMain.handle("stopPlaying", () => {
   discord_client.disconnect()
 })
@@ -71,7 +67,7 @@ ipcMain.handle("playing", (event, version) => {
 
 app.whenReady().then(() => {
   if (process.platform === 'win32') {
-    app.setAppUserModelId(app.name);
+    app.setAppUserModelId("BRLauncher");
   }
   createWindow()
   app.on('activate', () => {

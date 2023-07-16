@@ -27,3 +27,8 @@ type version = {
 export interface Cache {
     usernames: string[]
 }
+
+export interface FabricAPI {
+    version: string
+    stable: boolean
+}
