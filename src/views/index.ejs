@@ -5,75 +5,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../services/css/style.css">
+    <link href="../../node_modules/material-icons/iconfont/material-icons.css" rel="stylesheet">
     <title>Minecraft Launcher</title>
 </head>
 
-<body>
-    <main class="flex" style="background: url(../assets/wallpaper.jpg) no-repeat; background-size: cover;">
-        <aside class="flex flex-col w-52 h-screen bg-zinc-500 bg-opacity-50">
-            <nav class="flex flex-col gap-y-2">
-                <div class="mt-2 p-2 text-white">
-                    <p class="text-sm">LAUNCHER</p>
-                    <hr>
+<body style="background: url(../assets/wallpaper.jpg) no-repeat; background-size: cover;">
+    <header>
+        <div style="-webkit-user-select: none; user-select: none; -webkit-app-region: drag;" class="text-white flex justify-end fixed w-full">
+            <div>
+                <span style="-webkit-app-region: no-drag;" class="material-icons cursor-pointer hover:bg-slate-500 p-1" id="minimize">close_fullscreen</span>
+            </div>
+            <div>
+                <span style="-webkit-app-region: no-drag;" class="material-icons cursor-pointer hover:bg-red-600 p-1" onclick="window.close()">close</span>
+            </div>
+        </div>
+    </header>
+    <main class="flex h-screen justify-center items-center">
+        <div class="w-11/12 h-[85%] bg-zinc-600 flex flex-col items-center bg-opacity-50">
+            <div class="mt-3">
+                <img src="../assets/BRLauncher.png" width="250">
+            </div>
+            <div class="bg-zinc-800 w-[90%] h-96 mt-3 bg-opacity-50 shadow p-7">
+                <div>
+                    <label for="name" class="text-zinc-200 flex items-center mb-1"><span
+                            class="material-icons mr-1">person</span> Seu username</label>
+                    <input
+                        class="block w-full outline-none text-zinc-300 bg-transparent border-b-2 border-white focus:border-blue-400 duration-300"
+                        type="text" placeholder="Player" id="name">
+
                 </div>
-                <a href="#">
-                    <div
-                        class="group p-2 flex items-center text-white duration-500 hover:bg-neutral-300 hover:bg-opacity-50 hover:text-black">
-                        <div>
-                            <img src="../assets/logo.ico" class="w-9 group-hover:scale-110 duration-500">
-                        </div>
-                        <p class="ml-3">Configurações</p>
-                    </div>
-                </a>
-                <a onclick="window.close()" href="#">
-                    <div
-                        class="group p-2 flex items-center text-white duration-500 hover:bg-neutral-300 hover:bg-opacity-50 hover:text-black">
-                        <div>
-                            <img src="../assets/tnt.png" class="w-9 group-hover:scale-110 duration-500">
-                        </div>
-                        <p class="ml-3">Fechar</p>
-                    </div>
-                </a>
-                <div class="mt-2 p-2 text-white">
-                    <p class="text-sm">CONTA</p>
-                    <hr>
-                </div>
-                <a href="#">
-                    <div
-                        class="group p-2 flex items-center text-white duration-500 hover:bg-neutral-300 hover:bg-opacity-50 hover:text-black">
-                        <div>
-                            <img src="../assets/steve.png" class="w-9 group-hover:scale-110 duration-500">
-                        </div>
-                        <p class="ml-3">Trocar</p>
-                    </div>
-                </a>
-            </nav>
-        </aside>
-        <div class="w-full bg-zinc-600 bg-opacity-50">
-            <div class="flex justify-between h-3/4">
-                <div class="h-fit inline-block self-end">
-                    <label class="block text-white" for="block">Versão</label>
-                    <select id="version">
+                <div class="mt-6">
+                    <label class="text-zinc-200 flex items-center mb-1" for="version"><span
+                            class="material-icons mr-1">playlist_play</span> Selecione a versão</label>
+                    <select id="version"
+                        class="w-full block bg-transparent border-b-2 border-white focus:border-blue-400 duration-300 outline-none text-zinc-300">
                         <% for(let version of versions) { %>
-                            <option value="<%= version.id %>">
-                                <%= version.id %> Vanilla
+                            <option class="text-black" value="<%= version.id %>">
+                                relase <%= version.id %> vanilla
                             </option>
-                        <% } %>
+                            <% } %>
                     </select>
                 </div>
-                <div class="h-fit inline-block self-end">
-                    <button id="play" class="bg-gradient-to-br from-blue-500 to-blue-700 px-5 py-2 rounded hover:ring-4 ring-blue-400 duration-500 text-white">Instalar e Jogar</button>
+                <div class="mt-3">
+                    <button id="play" class="text-center flex p-1 text-zinc-300 bg-zinc-400 w-full items-center justify-center"><span
+                        class="material-icons mr-1">play_circle</span> Jogar</button>
                 </div>
-                <div class="h-fit inline-block self-end">
-                    <label for="name" class="block text-white">Nome do perfil</label>
-                    <input type="text" id="name" placeholder="Player">
+                <div class="mt-2">
+                    <input type="checkbox" id="discord">
+                    <label for="discord" class="text-white">Exibir BRLauncher como meu status do Discord.</label>
                 </div>
             </div>
-            <div class="h-1/4 bg-zinc-950 bg-opacity-40 text-red-500 flex flex-col">
-                <label for="console">Console</label>
-                <hr>
-                <div id="logs" class="h-full overflow-y-scroll overflow-x-hidden">Os logs aparecerão aqui...</div>
-            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 h-7 bg-green-400 text-ellipsis overflow-hidden" id="barra">
         </div>
     </main>
     <script>var exports = {};</script>

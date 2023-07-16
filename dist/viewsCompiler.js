@@ -53,6 +53,7 @@ fetch("https://piston-meta.mojang.com/mc/game/version_manifest_v2.json")
         shell.mkdir("dist/assets");
     if (!(0, fs_1.existsSync)("./dist/services/css"))
         shell.mkdir("dist/services/css");
+    shell.cp("-R", "package.json", "dist");
     shell.cp("-R", ["src/assets/*"], "dist/assets/");
     shell.cp("-R", ["src/views/*.html"], "dist/views/");
     shell.cp("-R", ["src/services/css/*.css"], "dist/services/css");

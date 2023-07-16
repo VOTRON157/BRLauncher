@@ -12,9 +12,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const minecraft_launcher_core_1 = require("minecraft-launcher-core");
 const electron_1 = require("electron");
 window.addEventListener('DOMContentLoaded', () => {
-    var _a;
-    const logs = document.getElementById("logs");
+    // const logs = document.getElementById("logs") as HTMLElement
+    const playButton = document.getElementById("play");
+    const minimize = document.getElementById("minimize");
+    const barra = document.getElementById('barra');
+    const discord = document.getElementById('discord');
+    discord.addEventListener("click", (event) => {
+        if (discord.checked) {
+            electron_1.ipcRenderer.invoke("playing");
+            alert("Status definido no seu Discord, para desativar é so desmarca a caixa.");
+        }
+        else {
+            electron_1.ipcRenderer.invoke("stopPlaying");
+        }
+    });
     const startlauncher = () => __awaiter(void 0, void 0, void 0, function* () {
+        const assets = new Set();
+        playButton.disabled = true;
+        playButton.innerHTML = '<span class="material-icons mr-1">access_time</span> Carregando...';
         const name = document.getElementById("name").value || "Player";
         const version = document.getElementById("version").value;
         // const password = (document.getElementById("password") as HTMLInputElement).value
@@ -32,14 +47,22 @@ window.addEventListener('DOMContentLoaded', () => {
                 max: "3G"
             }
         });
-        electron_1.ipcRenderer.invoke("startDownload");
-        logs.innerHTML = "";
-        launcher.on("debug", (e) => {
-            logs.innerHTML += `<p style="display: block; margin: 0;">${e}</p>`;
+        launcher.on("download-status", (download) => {
+            const porcetagem = Math.round((download.current / download.total) * 100);
+            barra.innerHTML = `Baixando ${download.name} | ${porcetagem}% | ${download.current}/${download.total} Bytes`;
+            barra.style.width = `${porcetagem}%`;
         });
-        launcher.on("data", (e) => {
-            logs.innerHTML += `<p style="display: block; margin: 0;">${e}</p>`;
+        launcher.on('close', code => {
+            playButton.disabled = false;
+            playButton.innerHTML = '<span class="material-icons mr-1">play_circle</span> Jogar';
+            electron_1.ipcRenderer.invoke("stopPlaying");
+        });
+        launcher.on("error", (err) => {
+            playButton.disabled = false;
+            playButton.innerHTML = '<span class="material-icons mr-1">play_circle</span> Jogar';
+            alert(err);
         });
     });
-    (_a = document.getElementById("play")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", startlauncher);
+    minimize.addEventListener("click", () => electron_1.ipcRenderer.invoke("minimize"));
+    playButton.addEventListener("click", startlauncher);
 });

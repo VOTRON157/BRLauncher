@@ -21,10 +21,11 @@ fetch("https://piston-meta.mojang.com/mc/game/version_manifest_v2.json")
                 }
             })
         }
-
+        
         if (!existsSync("./dist/views")) shell.mkdir("dist/views")
         if (!existsSync("./dist/assets")) shell.mkdir("dist/assets")
         if (!existsSync("./dist/services/css")) shell.mkdir("dist/services/css")
+        shell.cp("-R", "package.json", "dist")
         shell.cp("-R", ["src/assets/*"], "dist/assets/")
         shell.cp("-R", ["src/views/*.html"], "dist/views/")
         shell.cp("-R", ["src/services/css/*.css"], "dist/services/css")
