@@ -1,4 +1,5 @@
 import { ipcRenderer } from "electron"
+import { writeFileSync } from "original-fs";
 import { Mojang, Launch } from "minecraft-java-core"
 const launcher = new Launch();
 
@@ -9,21 +10,18 @@ window.addEventListener('DOMContentLoaded', () => {
     const barra = document.getElementById('barra') as HTMLElement
     const discord = document.getElementById('discord') as HTMLInputElement
 
-    discord.addEventListener("click", (event) => {
-        if (discord.checked) {
-            ipcRenderer.invoke("playing")
-            alert("Status definido no seu Discord, para desativar é so desmarca a caixa.")
-        } else {
-            ipcRenderer.invoke("stopPlaying")
-        }
-    })
-
     const startlauncher = async () => {
 
         playButton.disabled = true
         playButton.innerHTML = '<span class="material-icons mr-1">access_time</span> Carregando...'
         const name = (document.getElementById("name") as HTMLInputElement).value || "Player"
         const version = (document.getElementById("version") as HTMLSelectElement).value;
+
+        writeFileSync("./launcherCache.json", JSON.stringify({
+            lastUsername: name,
+            lastVersion: version
+        }))
+
         const custom = (value: string) => {
             const values: any = {
                 vanilla: {
@@ -65,7 +63,7 @@ window.addEventListener('DOMContentLoaded', () => {
             screen: {
                 width: 1000,
                 height: 650,
-                fullscreen: true,
+                fullscreen: null,
             },
 
             memory: {
@@ -101,11 +99,14 @@ window.addEventListener('DOMContentLoaded', () => {
         launcher.on("error", (err: any) => {
             playButton.disabled = false
             playButton.innerHTML = '<span class="material-icons mr-1">play_circle</span> Jogar'
+            ipcRenderer.invoke("stopPlaying")
             alert(JSON.stringify(err))
         })
 
-        launcher.on('data', console.log)
-        launcher.on('debug', console.log)
+        launcher.on('data', (data: any) => {
+            if(data.includes("Launching")) ipcRenderer.invoke("playing", version)
+        })
+        // launcher.on('debug', console.log)
 
     }
     minimize.addEventListener("click", () => ipcRenderer.invoke("minimize"))

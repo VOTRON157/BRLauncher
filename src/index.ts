@@ -58,7 +58,8 @@ ipcMain.handle("stopPlaying", () => {
 ipcMain.handle("playing", (event, version) => {
   discord_client
     .updatePresence({
-      state: `Jogando Minecraft`,
+      state: `Minecraft ${version.split(" ")[1]}`,
+      details: `Jogando Minecraft ${version.split(" ")[0]}`,
       startTimestamp: Date.now(),
       largeImageKey: 'brlauncher',
       instance: false,

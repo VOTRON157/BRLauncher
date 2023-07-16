@@ -6,6 +6,10 @@ export interface Startlauncher {
     minMemory: string
 }
 
+export interface Cache {
+    lastUsername: string
+    lastVersion: string 
+} 
 export interface MineAPI {
     lastet: {
         release: string

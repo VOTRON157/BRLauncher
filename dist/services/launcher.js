@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const electron_1 = require("electron");
+const original_fs_1 = require("original-fs");
 const minecraft_java_core_1 = require("minecraft-java-core");
 const launcher = new minecraft_java_core_1.Launch();
 window.addEventListener('DOMContentLoaded', () => {
@@ -18,21 +19,16 @@ window.addEventListener('DOMContentLoaded', () => {
     const minimize = document.getElementById("minimize");
     const barra = document.getElementById('barra');
     const discord = document.getElementById('discord');
-    discord.addEventListener("click", (event) => {
-        if (discord.checked) {
-            electron_1.ipcRenderer.invoke("playing");
-            alert("Status definido no seu Discord, para desativar é so desmarca a caixa.");
-        }
-        else {
-            electron_1.ipcRenderer.invoke("stopPlaying");
-        }
-    });
     const startlauncher = () => __awaiter(void 0, void 0, void 0, function* () {
         var _a, _b;
         playButton.disabled = true;
         playButton.innerHTML = '<span class="material-icons mr-1">access_time</span> Carregando...';
         const name = document.getElementById("name").value || "Player";
         const version = document.getElementById("version").value;
+        (0, original_fs_1.writeFileSync)("./launcherCache.json", JSON.stringify({
+            lastUsername: name,
+            lastVersion: version
+        }));
         const custom = (value) => {
             const values = {
                 vanilla: {
@@ -71,7 +67,7 @@ window.addEventListener('DOMContentLoaded', () => {
             screen: {
                 width: 1000,
                 height: 650,
-                fullscreen: true,
+                fullscreen: null,
             },
             memory: {
                 min: '1G',
@@ -102,10 +98,14 @@ window.addEventListener('DOMContentLoaded', () => {
         launcher.on("error", (err) => {
             playButton.disabled = false;
             playButton.innerHTML = '<span class="material-icons mr-1">play_circle</span> Jogar';
+            electron_1.ipcRenderer.invoke("stopPlaying");
             alert(JSON.stringify(err));
         });
-        launcher.on('data', console.log);
-        launcher.on('debug', console.log);
+        launcher.on('data', (data) => {
+            if (data.includes("Launching"))
+                electron_1.ipcRenderer.invoke("playing", version);
+        });
+        // launcher.on('debug', console.log)
     });
     minimize.addEventListener("click", () => electron_1.ipcRenderer.invoke("minimize"));
     playButton.addEventListener("click", startlauncher);

@@ -31,8 +31,9 @@
                             class="material-icons mr-1">person</span> Seu username</label>
                     <input
                         class="block w-full outline-none text-zinc-300 bg-transparent border-b-2 border-white focus:border-blue-400 duration-300"
-                        type="text" placeholder="Player" id="name">
-
+                        type="text" placeholder="Player" id="name" <% if (cache.lastUsername.length > 0) { %>
+                            value="<%= cache.lastUsername %>" 
+                        <% } %>>
                 </div>
                 <div class="mt-6">
                     <label class="text-zinc-200 flex items-center mb-1" for="version"><span
@@ -40,17 +41,23 @@
                     <select id="version"
                         class="w-full block bg-transparent border-b-2 border-white focus:border-blue-400 duration-300 outline-none text-zinc-300">
                         <% for(let version of vanilla) { %>
-                            <option class="text-black" value="<%= version.id %> vanilla">
+                            <option class="text-black" <% if (cache.lastVersion.length > 0 && `${version} vanilla` == cache.lastVersion ) { %>
+                                selected 
+                            <% } %> value="<%= version.id %> vanilla">
                                 <%= version.id %> vanilla
                             </option>
                         <% } %>
                         <% for(let version of fabric) { %>
-                            <option class="text-black" value="<%= version.version %> fabric">
+                            <option class="text-black" <% if (cache.lastVersion.length > 0 && `${version} fabric` == cache.lastVersion ) { %>
+                                selected 
+                            <% } %> value="<%= version.version %> fabric">
                                 <%= version.version %> fabric
                             </option>
                         <% } %>
                         <% for(let version of forge) { %>
-                            <option class="text-black" value="<%= version%> forge">
+                            <option class="text-black" <% if (cache.lastVersion.length > 0 && `${version} forge` == cache.lastVersion ) { %>
+                                selected 
+                            <% } %> value="<%= version %> forge">
                                 <%= version %> forge
                             </option>
                         <% } %>
@@ -59,10 +66,6 @@
                 <div class="mt-3">
                     <button id="play" class="text-center flex p-1 text-zinc-300 bg-zinc-400 w-full items-center justify-center"><span
                         class="material-icons mr-1">play_circle</span> Jogar</button>
-                </div>
-                <div class="mt-2">
-                    <input type="checkbox" id="discord">
-                    <label for="discord" class="text-white">Exibir BRLauncher como meu status do Discord.</label>
                 </div>
             </div>
         </div>

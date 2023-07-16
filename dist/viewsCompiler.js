@@ -71,9 +71,10 @@ const axios_1 = __importDefault(require("axios"));
     console.log("✔️  Versões verificadas");
     const views = (0, path_1.join)(__dirname, "views");
     const templates = (0, fs_1.readdirSync)(views);
+    const cache = JSON.parse((0, fs_1.readFileSync)("./launcherCache.json", "utf-8"));
     for (let file of templates) {
         ejs_1.default.renderFile((0, path_1.join)(views, file), {
-            vanilla: vanilla.versions, fabric, forge
+            vanilla: vanilla.versions, fabric, forge, cache
         }, (err, str) => {
             if (err) {
                 console.log(err);
@@ -90,7 +91,6 @@ const axios_1 = __importDefault(require("axios"));
         shell.mkdir("dist/assets");
     if (!(0, fs_1.existsSync)("./dist/services/css"))
         shell.mkdir("dist/services/css");
-    shell.cp("-R", "package.json", "dist");
     shell.cp("-R", ["src/assets/*"], "dist/assets/");
     shell.cp("-R", ["src/views/*.html"], "dist/views/");
     shell.cp("-R", ["src/services/css/*.css"], "dist/services/css");

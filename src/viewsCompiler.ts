@@ -1,12 +1,13 @@
 import ejs from "ejs"
 import * as shell from "shelljs";
-import { MineAPI, FabricAPI } from "./interfaces/launcher";
-import { readdirSync, writeFileSync, existsSync } from "fs"
+import { MineAPI, FabricAPI, Cache } from "./interfaces/launcher";
+import { readdirSync, writeFileSync, existsSync, readFileSync } from "fs"
 import { join } from "path"
 import notifier from "node-notifier"
 import axios from "axios"
 
 (async () => {
+
     notifier.notify({
         appID: "BRLauncher",
         title: 'Minecraf Launcher',
@@ -15,6 +16,7 @@ import axios from "axios"
         sound: true,
         wait: false
     })
+
     console.log("⏳ Verificando as versões do minecraft e copiando arquivos, isso pode demorar um pouco...")
     let forge: string[] = [];
     let vanilla = await (await fetch("https://piston-meta.mojang.com/mc/game/version_manifest_v2.json")).json() as MineAPI
@@ -40,9 +42,11 @@ import axios from "axios"
     const views = join(__dirname, "views")
     const templates = readdirSync(views)
 
+    const cache = JSON.parse(readFileSync("./launcherCache.json", "utf-8"))
+
     for (let file of templates) {
         ejs.renderFile(join(views, file), {
-            vanilla: vanilla.versions, fabric, forge
+            vanilla: vanilla.versions, fabric, forge, cache
         }, (err, str) => {
             if (err) {
                 console.log(err);
@@ -57,7 +61,6 @@ import axios from "axios"
     if (!existsSync("./dist/views")) shell.mkdir("dist/views")
     if (!existsSync("./dist/assets")) shell.mkdir("dist/assets")
     if (!existsSync("./dist/services/css")) shell.mkdir("dist/services/css")
-    shell.cp("-R", "package.json", "dist")
     shell.cp("-R", ["src/assets/*"], "dist/assets/")
     shell.cp("-R", ["src/views/*.html"], "dist/views/")
     shell.cp("-R", ["src/services/css/*.css"], "dist/services/css")
