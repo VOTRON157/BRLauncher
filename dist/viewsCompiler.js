@@ -42,6 +42,7 @@ const path_1 = require("path");
 const node_notifier_1 = __importDefault(require("node-notifier"));
 const axios_1 = __importDefault(require("axios"));
 (() => __awaiter(void 0, void 0, void 0, function* () {
+    console.clear();
     node_notifier_1.default.notify({
         appID: "BRLauncher",
         title: 'Minecraf Launcher',

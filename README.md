@@ -4,52 +4,50 @@
 
 # BRLauncher
 
-Um launcher de Minecraft 100% Brasileiro, seguro e de código aberto!
-
-## Como instalar
-
 Para instalar esse launcher no seu computador siga as seguintes etapas:
 
-🚨 LEMBRE-SE DE INSTALAR O JAVA E O NODEJS
+## Instalação 
 
-### Clonar o projeto
+Siga os passos abaixo para instalar o BRLauncher no seu computador:
 
-1. Baixar o código
+### Requisitos do Sistema
 
-Primeiramente você precisa baixar o código fonte para seu computador, você pode fazer isso assim:
+Antes de começar, verifique se o seu sistema atende aos seguintes requisitos:
 
-```bash
-git clone https://github.com/VOTRON157/BRLauncher.git
-cd BRLauncher
-```
+- Sistema Operacional: Windows
+- NodeJS: É necessário ter o NodeJS instalado. Recomendamos a versão mais recente.
+    - Instalar o NodeJS: https://nodejs.org/pt-br
 
-Se você não tiver o git instalado, você pode baixar através do proprio github:
-
-<img src="./images/tutorial.png">
-
-E abra a pasta com os arquivos no terminal, igual a gente fez no primeiro exemplo (usando o git).
-
-2. Instalar os pacotes
-
-Para conseguimos rodar o código precisamos instalar as blibiotecas, primeiro entre na pasta onde está o código fonte através de um terminal.
-
-~~a pasta deve ter isso, ou algo parecido com isso dentro~~
-
-<img src="./images/dir.png">
-
-~~como abrir uma pasta no terminal usando windows:~~
-
-<img src="./images/abrir.png">
-
-Depois de ter feito isso, digite os seguintes comandos (na pespectiva ordem) no terminal:
+1. **Baixar o código:** No repositório do BRLauncher, clique no botão "Download ZIP" para baixar o código fonte compactado. Alternativamente, você pode clonar o repositório usando o comando Git:
+    - [Onde fica o botão "Download ZIP"?](https://github.com/VOTRON157/BRLauncher/blob/main/images/tutorial.png) 
 
 ```bash
-npm install
-npm run build:css
-# Esse primeiro e segundo comando só é necessario na primeira vez que você for abrir.
-npm start
+git clone https://github.com/VOTRON157/BRLauncher.git # Nesse caso não precisa descompactar, já vai vim a pasta.
 ```
 
-Uma janela ira se abrir e você já podera usar o launcher!
+2. **Extrair os arquivos:** Após o download ser concluído, extraia os arquivos do ZIP em uma pasta de sua escolha  (la é onde ficara a pasta `.minecraft`).
 
-<img src="./images/launcher.png" width="500">
+3. **Executar o arquivo `start.bat`:** Navegue até a pasta onde você extraiu os arquivos do launcher. Procure pelo arquivo start.bat e dê um duplo clique nele para executar o BRLauncher.
+
+## Suporte
+
+Caso você encontre problemas na execução, siga estas etapas:
+
+1. **Verificar a versão do NodeJS:** Alguns error podem ocorrer devido a versões obsoletas do Node, para verificar a versão instalada no seu computador você pode executar o seguinte comando:
+
+```bash
+node -v
+```
+
+# Lista do que fazer
+
+- [ ] Deixar a interface amigavel
+- [ ] Opção de customizar a skin
+- [ ] Definir o limite de mémoria ram da JVM
+- [x] Opção de modificar o Minecraft
+    - [x] Forge
+    - [x] Fabric
+    - [x] Vanilla 
+- [x] Guarda os dados do usuario quando ele fechar o Launcher
+- [ ] Deixar o código organizado
+- [ ] Criar a opção de instalar Mods a partir do próprio launcher.

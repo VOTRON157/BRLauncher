@@ -7,7 +7,7 @@ import notifier from "node-notifier"
 import axios from "axios"
 
 (async () => {
-
+    console.clear()
     notifier.notify({
         appID: "BRLauncher",
         title: 'Minecraf Launcher',

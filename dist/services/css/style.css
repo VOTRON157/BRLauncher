@@ -558,10 +558,6 @@ video {
   margin-right: 0.25rem;
 }
 
-.mt-2 {
-  margin-top: 0.5rem;
-}
-
 .mt-3 {
   margin-top: 0.75rem;
 }
@@ -620,10 +616,6 @@ video {
 
 .justify-center {
   justify-content: center;
-}
-
-.overflow-hidden {
-  overflow: hidden;
 }
 
 .overflow-clip {
