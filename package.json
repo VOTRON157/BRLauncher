@@ -14,15 +14,12 @@
   "dependencies": {
     "@types/discord-rich-presence": "^0.0.0",
     "@types/shelljs": "^0.8.12",
-    "@xmcl/forge-site-parser": "^2.0.9",
-    "@xmcl/installer": "^5.1.0",
     "axios": "^1.4.0",
     "discord-rich-presence": "^0.0.8",
     "ejs": "^3.1.9",
     "electron": "^25.3.0",
     "material-icons": "^1.13.8",
     "minecraft-java-core": "^3.5.7",
-    "minecraft-launcher-core": "^3.17.1",
     "node-notifier": "^10.0.1",
     "shelljs": "^0.8.5"
   },
