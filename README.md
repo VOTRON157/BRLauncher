@@ -4,7 +4,7 @@
 
 # BRLauncher
 
-Para instalar esse launcher no seu computador siga as seguintes etapas:
+Um launcher de Minecraft 100% Brasileiro, seguro e de código aberto!
 
 ## Instalação 
 
