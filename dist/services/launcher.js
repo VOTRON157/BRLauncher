@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const electron_1 = require("electron");
-const original_fs_1 = require("original-fs");
+const fs_1 = require("fs");
 const minecraft_java_core_1 = require("minecraft-java-core");
 const launcher = new minecraft_java_core_1.Launch();
 window.addEventListener('DOMContentLoaded', () => {
@@ -25,7 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
         playButton.innerHTML = '<span class="material-icons mr-1">access_time</span> Carregando...';
         const name = document.getElementById("name").value || "Player";
         const version = document.getElementById("version").value;
-        (0, original_fs_1.writeFileSync)("./launcherCache.json", JSON.stringify({
+        (0, fs_1.writeFileSync)("./cache.json", JSON.stringify({
             lastUsername: name,
             lastVersion: version
         }));
@@ -104,6 +104,7 @@ window.addEventListener('DOMContentLoaded', () => {
         launcher.on('data', (data) => {
             if (data.includes("Launching"))
                 electron_1.ipcRenderer.invoke("playing", version);
+            console.log(data);
         });
         // launcher.on('debug', console.log)
     });

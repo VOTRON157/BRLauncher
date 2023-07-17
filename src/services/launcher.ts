@@ -1,5 +1,5 @@
 import { ipcRenderer } from "electron"
-import { writeFileSync } from "original-fs";
+import { writeFileSync } from "fs";
 import { Mojang, Launch } from "minecraft-java-core"
 const launcher = new Launch();
 
@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const name = (document.getElementById("name") as HTMLInputElement).value || "Player"
         const version = (document.getElementById("version") as HTMLSelectElement).value;
 
-        writeFileSync("./launcherCache.json", JSON.stringify({
+        writeFileSync("./cache.json", JSON.stringify({
             lastUsername: name,
             lastVersion: version
         }))
@@ -105,6 +105,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         launcher.on('data', (data: any) => {
             if(data.includes("Launching")) ipcRenderer.invoke("playing", version)
+            console.log(data)
         })
         // launcher.on('debug', console.log)
 

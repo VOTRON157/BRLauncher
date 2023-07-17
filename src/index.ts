@@ -28,7 +28,7 @@ function createWindow() {
   new Notification({
     icon: join(__dirname, "assets/logo.ico"),
     title: "Minecraft Launcher",
-    body: "O launcher está pronto."
+    body: "Carregando as versões do Minecraft"
   }).show()
 
   ipcMain.handle("minimize", () => win.minimize())

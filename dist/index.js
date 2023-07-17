@@ -38,7 +38,7 @@ function createWindow() {
     new electron_1.Notification({
         icon: (0, path_1.join)(__dirname, "assets/logo.ico"),
         title: "Minecraft Launcher",
-        body: "O launcher está pronto."
+        body: "Carregando as versões do Minecraft"
     }).show();
     electron_1.ipcMain.handle("minimize", () => win.minimize());
 }

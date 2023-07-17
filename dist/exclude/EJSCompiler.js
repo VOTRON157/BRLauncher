@@ -39,17 +39,10 @@ const ejs_1 = __importDefault(require("ejs"));
 const shell = __importStar(require("shelljs"));
 const fs_1 = require("fs");
 const path_1 = require("path");
-const node_notifier_1 = __importDefault(require("node-notifier"));
 (() => __awaiter(void 0, void 0, void 0, function* () {
-    const views = (0, path_1.join)(__dirname, "views");
-    node_notifier_1.default.notify({
-        appID: "BRLauncher",
-        title: 'Minecraf Launcher',
-        message: 'O launcher está verificando as versões, quando tudo estiver pronto avisaremos...',
-        icon: (0, path_1.join)(__dirname, "assets/logo.ico"),
-        sound: true,
-        wait: false
-    });
+    const path = __dirname.split("\\");
+    path.pop();
+    const views = (0, path_1.join)(path.join("\\"), "views");
     const templates = (0, fs_1.readdirSync)(views);
     for (let file of templates) {
         ejs_1.default.renderFile((0, path_1.join)(views, file), {}, (err, str) => {
