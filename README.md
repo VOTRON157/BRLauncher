@@ -1,5 +1,5 @@
 <div style="display: flex; justify-content: center; aling-items: center;">
-    <img src="./images/icon.png" width="150">
+    <img src="./.github/images/icon.png" width="150">
 </div>
 
 # BRLauncher
@@ -19,7 +19,7 @@ Antes de começar, verifique se o seu sistema atende aos seguintes requisitos:
     - Instalar o NodeJS: https://nodejs.org/pt-br
 
 1. **Baixar o código:** No repositório do BRLauncher, clique no botão "Download ZIP" para baixar o código fonte compactado. Alternativamente, você pode clonar o repositório usando o comando Git:
-    - [Onde fica o botão "Download ZIP"?](https://github.com/VOTRON157/BRLauncher/blob/main/images/tutorial.png) 
+    - [Onde fica o botão "Download ZIP"?](https://github.com/VOTRON157/BRLauncher/blob/main/.github/images/tutorial.png) 
 
 ```bash
 git clone https://github.com/VOTRON157/BRLauncher.git # Nesse caso não precisa descompactar, já vai vim a pasta.

@@ -10,19 +10,9 @@
 </head>
 
 <body style="background: url(../assets/wallpaper.jpg) no-repeat; background-size: cover;">
-    <%- include('loading.ejs')  %>
+    <%- include('partials/loading.ejs')  %>
     <header>
-        <div style="-webkit-user-select: none; user-select: none; -webkit-app-region: drag;"
-            class="text-white flex justify-end fixed w-full z-50">
-            <div>
-                <span style="-webkit-app-region: no-drag;" class="material-icons cursor-pointer hover:bg-slate-500 p-1"
-                    id="minimize">close_fullscreen</span>
-            </div>
-            <div>
-                <span style="-webkit-app-region: no-drag;" class="material-icons cursor-pointer hover:bg-red-600 p-1"
-                    onclick="window.close()">close</span>
-            </div>
-        </div>
+        <%- include('partials/topbar.ejs')  %>
     </header>
     <main class="flex h-screen justify-center items-center">
         <div class="w-11/12 h-[85%] bg-zinc-600 flex flex-col items-center bg-opacity-50">
@@ -49,13 +39,16 @@
                         class="text-center flex p-1 text-zinc-300 bg-zinc-400 w-full items-center justify-center"><span
                             class="material-icons mr-1">play_circle</span> Jogar</button>
                 </div>
+                <div class="flex justify-around">
+                    <button class="w-full bg-blue-500" id="config">Configurar</button>
+                </div>
             </div>
         </div>
-        <div class="absolute bottom-0 left-0 duration-500 bg-green-400 overflow-clip text-ellipsis text-zinc-700"
+        <div class="absolute bottom-0 left-0 duration-500 line-clamp-1 bg-green-400 overflow-clip text-ellipsis text-zinc-700"
             id="barra"></div>
     </main>
     <script>var exports = {};</script>
-    <script src="../services/launcher.js"></script>
+    <script src="../services/bundle.js" defer></script>
     <span class="text-black"></span>
 </body>
 </html>

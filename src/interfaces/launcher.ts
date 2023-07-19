@@ -36,3 +36,15 @@ export interface FabricAPI {
     version: string
     stable: boolean
 }
+
+export interface Config {
+    dir: string
+    memory: {
+        max: string
+        min: string
+    }
+    javaPath?: string
+    width: number
+    height: number
+    fullScreen: boolean
+}

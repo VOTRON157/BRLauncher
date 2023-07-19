@@ -1,18 +1,82 @@
 import { readFileSync } from "fs";
 import { FabricAPI, MineAPI } from "../interfaces/launcher";
+import { Config } from "../interfaces/launcher";
 import axios from "axios";
+import os from "os"
+import { writeFileSync } from "original-fs";
+import { ipcRenderer } from "electron";
+
 const cache = JSON.parse(readFileSync("./cache.json", "utf-8"))
+const config = JSON.parse(readFileSync("./config.json", "utf-8")) as Config
 
 window.addEventListener("DOMContentLoaded", async () => {
-    await versions()
-    await setCachedUsername()
+    if (document.title == "Minecraft Launcher") {
+        await versions()
+        await setCachedUsername()
+    } else if (document.title == "Launcher Configurações") {
+        setDefaultOptions()
+    }
+
     const loading = document.getElementById('loading') as HTMLElement
     loading.remove()
 })
 
+async function setDefaultOptions() {
+    const dir = document.getElementById("dir") as HTMLInputElement
+    const largura = document.getElementById("largura") as HTMLInputElement
+    const altura = document.getElementById("altura") as HTMLInputElement
+    const memory = document.getElementById("memory") as HTMLInputElement
+
+    const fullScreen = document.getElementById("fullscreen") as HTMLInputElement
+    const saveButton = document.getElementById("save") as HTMLButtonElement
+    const memoryPanel = document.getElementById("memoryPanel") as HTMLInputElement
+    const voltar = document.getElementById("voltar") as HTMLButtonElement
+
+    fullScreen.checked = config.fullScreen
+    dir.value = config.dir
+    largura.value = config.width.toString()
+    altura.value = config.height.toString()
+    memory.min = config.memory.min.replace("M", '')
+    memory.max = Math.round((os.totalmem()) / (1020**2)).toString()
+    memory.value = config.memory.max.replace("M", '')
+
+    memoryPanel.value = memory.value.toString()
+
+    memoryPanel.addEventListener("input", () => {
+        memory.value = memoryPanel.value
+    })
+
+    memoryPanel.addEventListener("change", () => {
+        if(parseInt(memoryPanel.value) < 1024) memoryPanel.value = memory.min
+        else if (parseInt(memoryPanel.value) > parseInt(memory.max)) memoryPanel.value = memory.max
+    })
+
+    memory.addEventListener("input", () => {
+        memoryPanel.value = memory.value
+    })
+
+    voltar.addEventListener("click", () => ipcRenderer.invoke("home"))
+
+    saveButton.addEventListener("click", () => {
+        const data: Config = {
+            dir: dir.value,
+            width: parseInt(largura.value),
+            height: parseInt(altura.value),
+            fullScreen: fullScreen.checked,
+            memory: {
+                min: "1024M",
+                max: memory.value + 'M',
+            }
+        }
+        writeFileSync("./config.json", JSON.stringify(data))
+        alert("Dados salvo!")
+    })
+}
+
+
 async function setCachedUsername() {
     const name = document.getElementById('name') as HTMLInputElement
-    if(cache.lastUsername.length) name.value = cache.lastUsername
+    if (cache.lastUsername.length) name.value = cache.lastUsername
 }
 
 async function versions() {
