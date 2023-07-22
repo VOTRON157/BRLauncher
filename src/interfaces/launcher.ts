@@ -8,8 +8,8 @@ export interface Startlauncher {
 
 export interface Cache {
     lastUsername: string
-    lastVersion: string 
-} 
+    lastVersion: string
+}
 export interface MineAPI {
     lastet: {
         release: string
@@ -47,4 +47,20 @@ export interface Config {
     width: number
     height: number
     fullScreen: boolean
+}
+
+export interface ConfigPage {
+    pageName: string
+}
+
+export interface AccountCreate {
+    access_token: string,
+    client_token:string,
+    uuid: string,
+    name: string,
+    user_properties: {},
+    meta: {
+        type: string,
+        online: boolean
+    }
 }
