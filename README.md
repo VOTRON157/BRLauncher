@@ -6,6 +6,18 @@
 
 Um launcher de Minecraft 100% Brasileiro, seguro e de código aberto!
 
+## Escolha a versão é jogue
+![home](./.github/images/brlauncher1.png)
+
+## Gerencie suas contas
+![home](./.github/images/brlauncher3.png)
+
+## Configure o launcher
+![home](./.github/images/brlauncher2.png)
+
+## Mostre ao mundo que você usa o melhor
+![home](./.github/images/brlauncher4.png)
+
 ## Instalação 
 
 Siga os passos abaixo para instalar o BRLauncher no seu computador:

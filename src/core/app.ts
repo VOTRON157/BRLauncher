@@ -1,0 +1,95 @@
+import { HomePage } from "./js/home";
+import { AccountsPage } from "./js/accounts";
+import { PageBase } from "./base";
+import { ConfigPage } from "./js/config";
+import { readFileSync } from "original-fs";
+import { ipcRenderer } from "electron";
+import Account from "../db/account";
+import path from "path"
+
+
+class App {
+    async setup() {
+        console.log("[CLIENT SIDE] The main app classes loaded.")
+        await this.initPages([HomePage])
+        await this.initPages([AccountsPage])
+        await this.initPages([ConfigPage])
+        await this.sideBar()
+        this.topBar()
+        this.setPage('home')
+        this.removeLoad()
+    }
+
+    private removeLoad(){
+        const loading = document.getElementById('loading') as HTMLDivElement
+        loading.remove()
+    }
+
+    private async initPages<T extends PageBase>(pages: (new () => T)[]) {
+        const pagesDiv = document.getElementById('content') as HTMLElement
+        for (let Page of pages) {
+            const page = new Page()
+            const pageContent = readFileSync(path.join(__dirname.replace('core', ''), 'pages', 'partials', `${page.pageName}.html`), 'utf-8')
+            const pageDiv = document.createElement("div")
+            pageDiv.classList.add('w-full', 'h-full', 'hidden')
+            pageDiv.id = page.pageName
+            pageDiv.innerHTML = pageContent
+            pagesDiv.appendChild(pageDiv)
+            await page.init()
+        }
+       
+    }
+    setPage(pageName: string) {
+        const page = document.getElementById(pageName) as HTMLElement
+        const active = document.querySelector(".block")
+        active?.classList.add('hidden')
+        active?.classList.remove('block')
+        page.classList.add('block')
+        page.classList.remove('hidden')
+        ipcRenderer.invoke('changedPage', pageName.replace('home', 'Tela inicial').replace('accounts', 'Configurando contas').replace('config', 'Configurando o Launcher'))
+    }
+
+    async sideBar() {
+
+        console.log('oi')
+
+        const sideUsername = document.getElementById('side-username') as HTMLElement
+        const sidebar = document.getElementById('sidebar') as HTMLElement
+        const sideBarButtons = sidebar.querySelectorAll(".sidebar-button") as NodeListOf<HTMLButtonElement>
+        sideBarButtons.forEach((button) => {
+            button.addEventListener("click", (event) => {
+                (sidebar.querySelector(".sidebar-active") as HTMLButtonElement).classList.remove("sidebar-active")
+                button.classList.add("sidebar-active")
+            })
+        })
+
+        const acc = await Account.getAtual()
+        if(!acc) sideUsername.innerHTML = 'Não logado'
+        else sideUsername.innerHTML = acc.name
+
+    }
+
+    topBar() {
+        const home_btn = document.getElementById('home-btn') as HTMLButtonElement
+        home_btn.addEventListener('click', () => this.setPage('home'))
+
+        const config_btn = document.getElementById('config-btn') as HTMLButtonElement
+        config_btn.addEventListener('click', () => this.setPage('config'))
+
+        const minimize = document.getElementById("minimize") as HTMLElement;
+        const maxmize = document.getElementById("maxmize") as HTMLElement;
+        const accounts = document.getElementById('accounts-btn') as HTMLButtonElement
+        const close = document.getElementById("close") as HTMLElement;
+
+       
+        minimize.addEventListener("click", () => ipcRenderer.invoke("minimize"));
+        close.addEventListener("click", () => window.close());
+        maxmize.addEventListener("click", () => ipcRenderer.invoke("maxmize"));
+        accounts.addEventListener('click', () => this.setPage('accounts'))
+
+    }
+}
+
+window.addEventListener("DOMContentLoaded", async () => {
+    await (new App()).setup()
+})

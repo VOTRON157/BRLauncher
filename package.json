@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:css": "npx tailwindcss -i ./src/services/css/input.css -o ./src/services/css/style.css",
+    "build:css:dev": "npx tailwindcss -i ./src/core/css/input.css -o ./src/core/css/style.css --watch",
+    "build:css": "npx tailwindcss -i ./src/core/css/input.css -o ./src/core/css/style.css",
     "start": "tsc && ts-node src/exclude/pre.ts && electron dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,12 +13,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^5.0.0",
     "@types/discord-rich-presence": "^0.0.0",
     "@types/shelljs": "^0.8.12",
     "appdata-path": "^1.0.0",
     "axios": "^1.4.0",
     "discord-rich-presence": "^0.0.8",
-    "ejs": "^3.1.9",
     "electron": "^25.3.0",
     "material-icons": "^1.13.8",
     "minecraft-java-core": "^3.5.7",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@types/ejs": "^3.1.2",
+    "prisma": "^5.0.0",
     "tailwindcss": "^3.3.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
