@@ -16,7 +16,7 @@ Um launcher de Minecraft 100% Brasileiro, seguro e de código aberto!
 ![home](./.github/images/brlauncher2.png)
 
 ## Mostre ao mundo que você usa o melhor
-![home](./.github/images/brlauncher2.png)
+![home](./.github/images/brlauncher4.png)
 
 ## Instalação 
 
