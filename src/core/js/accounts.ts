@@ -1,7 +1,7 @@
-import { PageBase } from "../base";
+import { PageBase } from "../base.js";
 import { Mojang } from "minecraft-java-core";
-import { AccountCreate } from "../../interfaces/launcher";
-import Account from "../../db/account";
+import { AccountCreate } from "../../interfaces/launcher.js";
+import Account from "../../db/account.js";
 
 class AccountsPage extends PageBase {
     constructor() {

@@ -1,6 +1,7 @@
-import { PageBase } from "../base";
-import Launcher from "../../db/launcher";
+import { PageBase } from "../base.js";
+import Launcher from "../../db/launcher.js";
 import os from "os"
+import { ipcRenderer } from "electron";
 
 class ConfigPage extends PageBase {
     constructor() {
@@ -55,6 +56,7 @@ class ConfigPage extends PageBase {
         const maxInput = document.getElementById('max') as HTMLInputElement
         const maxPanel = document.getElementById('maxPanel') as HTMLDivElement
         const minPanel = document.getElementById('minPanel') as HTMLDivElement
+        const fileExplorer = document.getElementById('fileExplorer') as HTMLButtonElement
 
         minInput.addEventListener('input', () => minPanel.innerHTML = minInput.value)
         maxInput.addEventListener('input', () => maxPanel.innerHTML = maxInput.value)
@@ -71,6 +73,12 @@ class ConfigPage extends PageBase {
             await Launcher.resetConfig()
             this.notification('Configurações resetadas 🗑️')
             this.startConfig()
+        })
+
+        fileExplorer.addEventListener('click', async () => {
+            const path = await ipcRenderer.invoke('fileExplorer') as string[] | undefined
+            if(!path) return 0;
+            dirInput.value = path[0]
         })
     }
 }

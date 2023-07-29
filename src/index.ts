@@ -1,5 +1,6 @@
-import { app, BrowserWindow, Notification, ipcMain } from "electron";
-import { initIPCHandlers } from "./ipcHandlers";
+import electron from "electron";
+const { app, BrowserWindow } = electron
+import { initIPCHandlers } from "./core/js/ipcHandlers.js";
 import { join } from "path";
 
 
@@ -13,7 +14,7 @@ async function createWindow() {
     icon: join(__dirname, "assets/logo.ico"),
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false,
+      contextIsolation: true,
       preload: join(__dirname, 'core', "app.js"),
     },
   });

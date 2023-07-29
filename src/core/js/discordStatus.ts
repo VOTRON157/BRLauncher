@@ -1,5 +1,5 @@
 import client from "discord-rich-presence";
-import config from "./config";
+import config from "../../config.js";
 
 const discord_client = client(config.discord_app_id);
 

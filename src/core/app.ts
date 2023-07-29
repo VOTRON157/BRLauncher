@@ -1,10 +1,11 @@
-import { HomePage } from "./js/home";
-import { AccountsPage } from "./js/accounts";
-import { PageBase } from "./base";
-import { ConfigPage } from "./js/config";
-import { readFileSync } from "original-fs";
-import { ipcRenderer } from "electron";
-import Account from "../db/account";
+import { HomePage } from "./js/home.js"
+import { AccountsPage } from "./js/accounts.js"
+import { PageBase } from "./base.js"
+import { ConfigPage } from "./js/config.js"
+import { AboutPage } from "./js/about.js"
+import { readFileSync } from "original-fs"
+import { ipcRenderer, shell } from "electron"
+import Account from "../db/account.js"
 import path from "path"
 
 
@@ -14,6 +15,7 @@ class App {
         await this.initPages([HomePage])
         await this.initPages([AccountsPage])
         await this.initPages([ConfigPage])
+        await this.initPages([AboutPage])
         await this.sideBar()
         this.topBar()
         this.setPage('home')
@@ -50,9 +52,6 @@ class App {
     }
 
     async sideBar() {
-
-        console.log('oi')
-
         const sideUsername = document.getElementById('side-username') as HTMLElement
         const sidebar = document.getElementById('sidebar') as HTMLElement
         const sideBarButtons = sidebar.querySelectorAll(".sidebar-button") as NodeListOf<HTMLButtonElement>
@@ -70,6 +69,9 @@ class App {
     }
 
     topBar() {
+        const about_btn = document.getElementById('about-btn') as HTMLButtonElement
+        about_btn.addEventListener('click', () => this.setPage('about'))
+
         const home_btn = document.getElementById('home-btn') as HTMLButtonElement
         home_btn.addEventListener('click', () => this.setPage('home'))
 

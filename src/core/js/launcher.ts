@@ -1,6 +1,6 @@
 import { Launch } from "minecraft-java-core"
-import LauncherSettings from "../../db/launcher"
-import Account from "../../db/account"
+import LauncherSettings from "../../db/launcher.js"
+import Account from "../../db/account.js"
 
 class Launcher extends Launch {
     constructor() {

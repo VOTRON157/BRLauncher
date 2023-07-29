@@ -1,10 +1,8 @@
 import axios from "axios"
-import { Launcher } from "./launcher"
-import { FabricAPI, MineAPI } from "../../interfaces/launcher"
+import { Launcher } from "./launcher.js"
+import { FabricAPI, MineAPI } from "../../interfaces/launcher.js"
 import { ipcRenderer } from "electron"
-import { PageBase } from "../base"
-import Account from "../../db/account"
-
+import { PageBase } from "../base.js"
 
 class HomePage extends PageBase {
     constructor() {

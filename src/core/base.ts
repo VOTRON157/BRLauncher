@@ -1,4 +1,4 @@
-import { ConfigPage as Config } from "../interfaces/launcher"
+import { ConfigPage as Config } from "../interfaces/launcher.js"
 
 abstract class PageBase {
     pageName: string

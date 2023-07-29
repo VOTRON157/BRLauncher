@@ -1,9 +1,10 @@
 {
   "name": "launcher-de-minecraft",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Um launcher de minecraft",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "tsc & node dist/build",
     "build:css:dev": "npx tailwindcss -i ./src/core/css/input.css -o ./src/core/css/style.css --watch",
     "build:css": "npx tailwindcss -i ./src/core/css/input.css -o ./src/core/css/style.css",
     "start": "tsc && ts-node src/exclude/pre.ts && electron dist/index.js",
@@ -19,12 +20,13 @@
     "appdata-path": "^1.0.0",
     "axios": "^1.4.0",
     "discord-rich-presence": "^0.0.8",
-    "electron": "^25.3.0",
     "material-icons": "^1.13.8",
     "minecraft-java-core": "^3.5.7",
     "shelljs": "^0.8.5"
   },
   "devDependencies": {
+    "electron-builder": "^24.4.0",
+    "electron": "^25.3.0",
     "@types/ejs": "^3.1.2",
     "prisma": "^5.0.0",
     "tailwindcss": "^3.3.3",
