@@ -4,3 +4,6 @@ package-lock.json
 /dist
 /.vscode
 /build
+/BRLauncher-win32-x64
+/windows_installer
+.env

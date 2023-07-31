@@ -55,7 +55,7 @@ class Account {
         return account
     }
     async accounts(){
-        const accounts = prisma.account.findMany({})
+        const accounts = await prisma.account.findMany({})
         return accounts
     }
 }

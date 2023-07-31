@@ -22,7 +22,8 @@ const initIPCHandlers = () => {
             properties: ['openDirectory']
         })
         return path
-    })
+    });
+    ipcMain.handle('openDevtools', () => BrowserWindow.getFocusedWindow()?.webContents.openDevTools());
 }
 
 export {

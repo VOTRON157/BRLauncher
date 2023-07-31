@@ -1,3 +1,4 @@
+import { ipcRenderer } from "electron";
 import { PageBase } from "../base.js";
 
 class AboutPage extends PageBase {
@@ -8,7 +9,12 @@ class AboutPage extends PageBase {
     }
 
     async init() {
-        console.log('Bom, essa página não tem scripts :)')
+        this.initButtons()
+    }
+
+    initButtons(){
+        const devtoolsBtn = document.getElementById('devtools') as HTMLButtonElement
+        devtoolsBtn.addEventListener('click', () => ipcRenderer.invoke('openDevtools'))
     }
 }
 

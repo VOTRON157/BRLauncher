@@ -1,8 +1,8 @@
-import electron from "electron";
-const { app, BrowserWindow } = electron
+import { app, BrowserWindow } from "electron";
 import { initIPCHandlers } from "./core/js/ipcHandlers.js";
 import { join } from "path";
-
+import dotenv from "dotenv"
+dotenv.config()
 
 const pages = join(__dirname, "pages");
 
@@ -11,7 +11,7 @@ async function createWindow() {
     minWidth: 1200,
     minHeight: 700,
     titleBarStyle: "hidden",
-    icon: join(__dirname, "assets/logo.ico"),
+    icon: join(__dirname, 'core', 'imgs', 'icons', 'icon.ico'),
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: true,
@@ -21,7 +21,6 @@ async function createWindow() {
 
   win.loadFile(join(pages, "index.html"));
   win.removeMenu();
-  win.webContents.openDevTools();
   initIPCHandlers()
 }
 
