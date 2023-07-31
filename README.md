@@ -1,65 +1,43 @@
-<div style="display: flex; justify-content: center; aling-items: center;">
-    <img src="./.github/images/icon.png" width="150">
-</div>
 
-# BRLauncher
+<h1 align="center">
+  <br>
+  <img src="./.github/images/icon.png" alt="BRLauncher" width="200">
+  <br>
+  BRLauncher
+  <br>
+</h1>
 
-Um launcher de Minecraft 100% Brasileiro, seguro e de código aberto!
+<h4 align="center">Um launcher de Minecraft baseado em <a href="https://www.electronjs.org/" target="_blank">Electron</a>.</h4>
 
-## Escolha a versão é jogue
-![home](./.github/images/brlauncher1.png)
+<p align="center">
+  <a href="#introdução">Introdução</a> •
+  <a href="#instalação">Instalação</a> •
+  <a href="#créditos">Créditos</a> •
+  <a href="#licensa">Licensa</a>
+</p>
 
-## Gerencie suas contas
-![home](./.github/images/brlauncher3.png)
+![screenshot](./.github/images/brlauncher1.png)
 
-## Configure o launcher
-![home](./.github/images/brlauncher2.png)
+## Introdução
 
-## Mostre ao mundo que você usa o melhor
-![home](./.github/images/brlauncher4.png)
+É importante informar a todos os usuários deste launcher de Minecraft que o mesmo é uma criação independente e não possui qualquer vínculo oficial com a Mojang AB, nem com suas propriedades intelectuais, incluindo o jogo Minecraft.<br><br>Ressaltamos que o uso deste launcher é opcional, e os jogadores devem estar cientes de que a Mojang AB não assume nenhuma responsabilidade por quaisquer problemas ou conflitos que possam surgir ao utilizar esta plataforma não oficial.
 
-## Instalação 
+## Instalação
 
-Siga os passos abaixo para instalar o BRLauncher no seu computador:
+Para rodar esse launcher em seu computador, você precisa baixar o instalador, que está diponivel no [releases](https://github.com/VOTRON157/BRLauncher/releases)
 
-### Requisitos do Sistema
+> **Nota**
+> Se você estiver usando outro sistema operacional sem ser Windows, você deve compilar esse projeto por conta prórpia.
 
-Antes de começar, verifique se o seu sistema atende aos seguintes requisitos:
+## Créditos
 
-- Sistema Operacional: Windows
-- NodeJS: É necessário ter o NodeJS instalado. Recomendamos a versão mais recente.
-    - Instalar o NodeJS: https://nodejs.org/pt-br
+O sistema de trocar de páginas através do id foi baseado no [Selvania Launcher](https://github.com/luuxis/Selvania-Launcher). por mais que eu tenha escrito todo o código, apenas gostei de idea de poder alternar entre as páginas.
 
-1. **Baixar o código:** No repositório do BRLauncher, clique no botão "Download ZIP" para baixar o código fonte compactado. Alternativamente, você pode clonar o repositório usando o comando Git:
-    - [Onde fica o botão "Download ZIP"?](https://github.com/VOTRON157/BRLauncher/blob/main/.github/images/tutorial.png) 
+**Tecnologias utilizadas**
 
-```bash
-git clone https://github.com/VOTRON157/BRLauncher.git # Nesse caso não precisa descompactar, já vai vim a pasta.
-```
+- [Electron](https://www.electronjs.org/)
+- [Node.js](https://nodejs.org/)
 
-2. **Extrair os arquivos:** Após o download ser concluído, extraia os arquivos do ZIP em uma pasta de sua escolha  (la é onde ficara a pasta `.minecraft`).
+## Licensa
 
-3. **Executar o arquivo `start.bat`:** Navegue até a pasta onde você extraiu os arquivos do launcher. Procure pelo arquivo start.bat e dê um duplo clique nele para executar o BRLauncher.
-
-## Suporte
-
-Caso você encontre problemas na execução, siga estas etapas:
-
-1. **Verificar a versão do NodeJS:** Alguns error podem ocorrer devido a versões obsoletas do Node, para verificar a versão instalada no seu computador você pode executar o seguinte comando:
-
-```bash
-node -v
-```
-
-# Lista do que fazer
-
-- [ ] Deixar a interface amigavel
-- [ ] Opção de customizar a skin
-- [ ] Definir o limite de mémoria ram da JVM
-- [x] Opção de modificar o Minecraft
-    - [x] Forge
-    - [x] Fabric
-    - [x] Vanilla 
-- [x] Guarda os dados do usuario quando ele fechar o Launcher
-- [ ] Deixar o código organizado
-- [ ] Criar a opção de instalar Mods a partir do próprio launcher.
+MIT
