@@ -20,7 +20,7 @@ class ConfigPage extends PageBase {
 
     async startConfig() {
         const data = await Launcher.config()
-        if (!data) return alert('Algo deu errado.')
+        if (!data) return this.notification('Algo deu errado.')
 
         const dirInput = document.getElementById('dir') as HTMLInputElement
         dirInput.value = data.path

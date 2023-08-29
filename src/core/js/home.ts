@@ -101,7 +101,7 @@ class HomePage extends PageBase {
 
         launcher.on("error", (err: any) => {
             barra.innerHTML = `<span class="text-red-700">${JSON.stringify(err)}</span>`
-            alert(JSON.stringify(err))
+            // alert(JSON.stringify(err))
         })
 
         launcher.on('data', (data: any) => {

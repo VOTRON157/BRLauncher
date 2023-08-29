@@ -36,7 +36,7 @@ class AccountsPage extends PageBase {
     async deleteAccount(id: number, div: HTMLDivElement, removeBtn?: HTMLButtonElement) {
         try {
             const acc = await Account.getById(id)
-            if(acc?.selected) return alert('Você não pode remover a conta que você está usando')
+            if(acc?.selected) return this.notification('Você não pode remover a conta que você está usando')
             const lengthacc = await Account.accounts()
             if(!lengthacc) {
                 const sideUsername = document.getElementById('side-username') as HTMLElement
@@ -50,7 +50,7 @@ class AccountsPage extends PageBase {
             }
             await Account.delete(id)   
         } catch (e){
-            alert('Algo deu errado ' + e)
+            this.notification('Algo deu errado ' + e)
         }
         
     }
@@ -132,7 +132,7 @@ class AccountsPage extends PageBase {
         const createbtn = document.getElementById('create-btn') as HTMLButtonElement
         createbtn.addEventListener('click', async () => {
             const username = (document.getElementById('new-acc-username') as HTMLInputElement).value
-            if (!username) return alert('Escreva algo!')
+            if (!username) return this.notification('Escreva algo!')
             const auth = await Mojang.login(username) as AccountCreate
             if (!auth) return;
             Account.create(auth)
@@ -146,9 +146,9 @@ class AccountsPage extends PageBase {
                         sideUsername.innerHTML = data.name
                     }
                     this.updateList(data.name, data.id)
-                    alert('Conta criada!')
+                    this.notification('Conta criada!')
                 })
-                .catch(e => console.log(e))
+                .catch(e => this.notification("Não foi possivel criar sua conta, tente novamente executando o BRLauncher como administrador."))
             const menu = document.getElementById('acc-menu') as HTMLElement
             menu.classList.add('hidden')
             menu.classList.remove('flex')

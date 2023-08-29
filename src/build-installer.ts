@@ -23,7 +23,7 @@ exec('npx prisma migrate reset --force', () => {
         exe: config.app_name,
         name: config.app_name,
         manufacturer: 'VOTRON157',
-        version: '1.0.0',
+        version: '1.0.1',
         ui: {
             chooseDirectory: true
         },

@@ -33,6 +33,7 @@ function createWindow() {
         });
         win.loadFile((0, path_1.join)(pages, "index.html"));
         win.removeMenu();
+        // win.webContents.openDevTools()
         (0, ipcHandlers_js_1.initIPCHandlers)();
     });
 }

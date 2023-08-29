@@ -21,6 +21,7 @@ async function createWindow() {
 
   win.loadFile(join(pages, "index.html"));
   win.removeMenu();
+  // win.webContents.openDevTools()
   initIPCHandlers()
 }
 
