@@ -26,7 +26,7 @@
 
 Para rodar esse launcher em seu computador, você precisa baixar o instalador, que está diponivel no [releases](https://github.com/VOTRON157/BRLauncher/releases)
 
-> **Nota**
+> **Nota:**
 > Se você estiver usando outro sistema operacional sem ser Windows, você deve compilar esse projeto por conta prórpia.
 
 ## Créditos
