@@ -169,7 +169,7 @@ class HomePage extends base_js_1.PageBase {
             yes_button.setAttribute('disabled', 'true');
             updater.classList.add('hidden');
             updater.classList.remove('flex');
-            // autoUpdater.downloadNewVersion()
+            autoUpdater.downloadNewVersion();
             autoUpdater.on("finished", () => {
                 this.notification("O BRLauncher foi atualizado para a versão mais recente. Reabra o launcher para ver as novidades.");
             });
