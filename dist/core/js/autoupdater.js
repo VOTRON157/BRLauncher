@@ -18,6 +18,7 @@ const semver_1 = __importDefault(require("semver"));
 const events_1 = __importDefault(require("events"));
 const decompress_1 = __importDefault(require("decompress"));
 const node_child_process_1 = require("node:child_process");
+const path_1 = __importDefault(require("path"));
 class AutoUpdater extends events_1.default {
     constructor() {
         super();
@@ -25,7 +26,8 @@ class AutoUpdater extends events_1.default {
         this.checkForUpdates();
     }
     checkForUpdates() {
-        const version = JSON.parse((0, node_fs_1.readFileSync)("./package.json", "utf-8")).version;
+        const version = JSON.parse((0, node_fs_1.readFileSync)(path_1.default.join(__dirname, "..", "..", "..", "package.json"), "utf-8")).version;
+        console.log(version);
         fetch("https://raw.githubusercontent.com/VOTRON157/BRLauncher/main/package.json")
             .then((res) => res.json())
             .then((json) => __awaiter(this, void 0, void 0, function* () {

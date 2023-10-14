@@ -5,7 +5,6 @@ import { ConfigPage } from "./js/config.js"
 import { AboutPage } from "./js/about.js"
 import { readFileSync } from "original-fs"
 import { ipcRenderer, shell } from "electron"
-import { AutoUpdater } from "./js/autoupdater.js"
 import Account from "../db/account.js"
 import path from "path"
 

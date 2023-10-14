@@ -5,6 +5,7 @@ import EventEmitter from "events"
 import TypedEmitter from "typed-emitter";
 import decompress from "decompress";
 import { exec } from "node:child_process";
+import path from "path"
 
 class AutoUpdater extends (EventEmitter as new () => TypedEmitter<Events>) {
   constructor() {
@@ -14,7 +15,8 @@ class AutoUpdater extends (EventEmitter as new () => TypedEmitter<Events>) {
   }
 
   checkForUpdates() {
-    const version = JSON.parse(readFileSync("./package.json", "utf-8")).version
+    const version = JSON.parse(readFileSync(path.join(__dirname, "..", "..", "..", "package.json"), "utf-8")).version
+    console.log(version)
     fetch("https://raw.githubusercontent.com/VOTRON157/BRLauncher/main/package.json")
       .then((res) => res.json())
       .then(async (json) => {
