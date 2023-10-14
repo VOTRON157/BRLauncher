@@ -64,3 +64,15 @@ export interface AccountCreate {
         online: boolean
     }
 }
+
+export interface ForgeAPI {
+    
+}
+
+type QuiltAPIGAME = {
+    version: string,
+    stable: boolean
+}
+export interface QuiltAPI {
+    game: QuiltAPIGAME[]
+}

@@ -12,7 +12,11 @@ class ConfigPage extends PageBase {
 
     async init() {
         if (!(await Launcher.config())) {
-            await Launcher.resetConfig()
+            try {
+                await Launcher.resetConfig()
+            } catch {
+                this.notification("Não foi possivel escrever no banco de dados, tente executar o BRLauncher como administrador.")
+            }
         }
         await this.startConfig()
         await this.initEvents()
@@ -20,7 +24,7 @@ class ConfigPage extends PageBase {
 
     async startConfig() {
         const data = await Launcher.config()
-        if (!data) return this.notification('Algo deu errado.')
+        if (!data) return this.notification('Algo deu <bold>extremamente</bold> errado. Aparentemente não foi possivel criar o banco de dados, para corrigir o problema, abra o BRLauncher como administrador.')
 
         const dirInput = document.getElementById('dir') as HTMLInputElement
         dirInput.value = data.path
@@ -62,22 +66,28 @@ class ConfigPage extends PageBase {
         maxInput.addEventListener('input', () => maxPanel.innerHTML = maxInput.value)
 
         const saveButton = document.getElementById('salvar') as HTMLButtonElement
-        saveButton.addEventListener('click', async () => {
-            await Launcher.update(dirInput.value, parseInt(minInput.value), parseInt(maxInput.value), parseInt(widthInput.value), parseInt(heightInput.value))
-            this.notification('Configuraçõe salvas 💫')
-            this.startConfig()
+        saveButton.addEventListener('click', () => {
+            Launcher.update(dirInput.value, parseInt(minInput.value), parseInt(maxInput.value), parseInt(widthInput.value), parseInt(heightInput.value))
+                .then(() => {
+                    this.notification('Configuraçõe salvas 💫')
+                    this.startConfig()
+                })
+                .catch(() => this.notification("Não foi possivel escrever no banco de dados, tente executar o BRLauncher como administrador."))
         })
 
         const resetButton = document.getElementById('reset') as HTMLButtonElement
         resetButton.addEventListener('click', async () => {
-            await Launcher.resetConfig()
-            this.notification('Configurações resetadas 🗑️')
-            this.startConfig()
+            Launcher.resetConfig()
+                .then(() => {
+                    this.notification('Configurações resetadas 🗑️')
+                    this.startConfig()
+                })
+                .catch(() => this.notification("Não foi possivel escrever no banco de dados, tente executar o BRLauncher como administrador."))
         })
 
         fileExplorer.addEventListener('click', async () => {
             const path = await ipcRenderer.invoke('fileExplorer') as string[] | undefined
-            if(!path) return 0;
+            if (!path) return 0;
             dirInput.value = path[0]
         })
     }

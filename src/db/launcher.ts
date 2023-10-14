@@ -1,6 +1,9 @@
 import { prisma } from "./index";
 import os from 'os'
 import getAppDataPath from "appdata-path";
+import shell from "shelljs";
+
+const javaPath = shell.exec("where java")
 
 class Launcher {
     async update(path: string, min: number, max: number, width: number, height: number){
@@ -30,7 +33,8 @@ class Launcher {
                     min: 1024,
                     max: Math.round(((os.totalmem() / (1024 ** 2))) / 2),
                     width: 1000,
-                    height: 600
+                    height: 600,
+                    javaPath: javaPath
                 }
             })
         } else {
@@ -40,7 +44,8 @@ class Launcher {
                     min: 1024,
                     max: Math.round(((os.totalmem() / (1024 ** 2))) / 2),
                     width: 1000,
-                    height: 600
+                    height: 600,
+                    javaPath: javaPath
                 }
             })
         }

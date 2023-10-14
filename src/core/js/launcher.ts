@@ -34,9 +34,7 @@ class Launcher extends Launch {
 
             verify: false,
             ignored: ['loader', 'options.txt'],
-            args: [],
-            javaPath: null,
-            java: true,
+            javaPath: settings.javaPath as string,
             screen: {
                 width: settings.width,
                 height: settings.height,
@@ -45,7 +43,10 @@ class Launcher extends Launch {
             memory: {
                 min: `${settings.min}M`,
                 max: `${settings.max}M`
-            }
+            },
+            url: null,
+            JVM_ARGS: [],
+            GAME_ARGS: []
         })
     }
 

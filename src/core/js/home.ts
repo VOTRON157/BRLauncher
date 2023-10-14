@@ -1,8 +1,10 @@
 import axios from "axios"
 import { Launcher } from "./launcher.js"
-import { FabricAPI, MineAPI } from "../../interfaces/launcher.js"
+import LauncherDB from "../../db/launcher.js";
+import { FabricAPI, MineAPI, QuiltAPI } from "../../interfaces/launcher.js"
 import { ipcRenderer } from "electron"
 import { PageBase } from "../base.js"
+import { readdirSync } from "node:fs"
 
 class HomePage extends PageBase {
     constructor() {
@@ -21,6 +23,24 @@ class HomePage extends PageBase {
         })
     }
 
+    /* private async getInstalledVersions(){
+        const launcherSettings = await LauncherDB.config()
+        // if(!launcherSettings) return this.notification("Algo deu errado, tente reiniciar o Launcher com permisões de administrador.")
+        let versions = readdirSync(`${launcherSettings?.path}\\versions`)
+        console.log(versions)
+        
+    } */
+
+    private async getNeoForgeVersions(){
+        // not implemented
+    }
+
+    private async getQuiltVersions(){
+        let quilt = (await (await fetch("https://meta.quiltmc.org/v3/versions")).json() as QuiltAPI).game.filter(v => v.stable).map(v => v.version)
+        console.log(quilt)
+        return quilt
+    }
+
     private async getFabricVersions() {
         let fabric = (await (await fetch("https://meta.fabricmc.net/v2/versions/game")).json() as FabricAPI[]).filter(v => v.stable).map(v => v.version)
         return fabric
@@ -31,17 +51,13 @@ class HomePage extends PageBase {
         return vanilla
     }
 
-    private async getForgeVersions(versions: string[]) {
-        const forge: string[] = []
-        for (var version of versions) {
-            const res = await axios.head(`https://files.minecraftforge.net/net/minecraftforge/forge/index_${version}.html`)
-                .then(res => res.status == 200 ? forge.push(version) : null)
-                .catch(e => console.log("Forge version not avaliable", version))
-        }
+    private async getForgeVersions() {
+        let forge = (await (await fetch("https://files.minecraftforge.net/net/minecraftforge/forge/maven-metadata.json")).json() as Object)
         return forge
+        // https://files.minecraftforge.net/net/minecraftforge/forge/maven-metadata.json
     }
 
-    private returnOptionElement(type: 'forge' | 'fabric' | 'vanilla', version: string) {
+    private returnOptionElement(type: 'forge' | 'fabric' | 'vanilla' | 'quilt', version: string) {
         const div = document.createElement('div')
         div.classList.add('flex', 'items-center', 'gap-x-3', 'p-2', 'cursor-pointer', 'border-l-0', 'hover:border-l-4', 'border-blue-500', 'duration-150')
         div.innerHTML = `<img src="../core/imgs/${type}.png" width="30">${type} ${version}`
@@ -59,22 +75,29 @@ class HomePage extends PageBase {
     async manageDropdown() {
         const vanilla = await this.getVanillaVersions()
         const fabric = await this.getFabricVersions()
-        const forge = await this.getForgeVersions(vanilla)
+        const forge = await this.getForgeVersions()
+        const quilt = await this.getQuiltVersions()
+        // const installed = await this.getInstalledVersions()
 
         const options = document.getElementById('options') as HTMLElement
 
         for (let version of vanilla) {
+            // const installedDiv = this.returnOptionElement('installed', version)
             const forgeDiv = this.returnOptionElement('forge', version)
             const fabricDiv = this.returnOptionElement('fabric', version)
             const vanillaDiv = this.returnOptionElement('vanilla', version)
+            const quiltDiv = this.returnOptionElement('quilt', version)
 
             options.appendChild(vanillaDiv)
 
             if (fabric.includes(version)) {
                 options.appendChild(fabricDiv)
             }
-            if (forge.includes(version)) {
+            if (Object.keys(forge).includes(version)) {
                 options.appendChild(forgeDiv)
+            }
+            if(quilt.includes(version)) {
+                options.appendChild(quiltDiv)
             }
         }
     }
