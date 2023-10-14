@@ -76,3 +76,14 @@ type QuiltAPIGAME = {
 export interface QuiltAPI {
     game: QuiltAPIGAME[]
 }
+
+export type Events = {
+    error: (error: Error) => void;
+    "update-found": () => void;
+    "downloading-zip": () => void;
+    "update-notavaliable": () => void;
+    "download-completed": () => void;
+    "unpacking": () => void
+    "copy": () => void
+    "finished": () => void;
+  };

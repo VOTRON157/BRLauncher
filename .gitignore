@@ -1,7 +1,6 @@
 /node_modules
 package-lock.json
 /.minecraft
-/dist
 /.vscode
 /build
 /BRLauncher-win32-x64

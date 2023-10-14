@@ -1,0 +1,44 @@
+<div class="p-3 overflow-y-scroll h-full">
+    <p class="text-4xl">Configurações</p>
+    <div class="flex flex-col gap-y-4">
+        <div class="flex flex-col">
+            <label for="dir" class="text-2xl">Diretorio</label>
+            <div class="flex">
+                <input class="w-full outline-none bg-zinc-900 p-1 border-l-4 border-blue-500 rounded-l focus:border-b-2"
+                    type="text" placeholder="Caminho para a pasta do minecraft" id="dir"><button
+                    class="bg-blue-500 px-1 rounded-r" id="fileExplorer">Procurar</button>
+            </div>
+        </div>
+        <div class="flex flex-col">
+            <label for="dir" class="text-2xl">Resolução</label>
+            <div class="flex">
+                <input
+                    class="w-full outline-none bg-zinc-900 p-1 border-l-4 border-blue-500 rounded-l focus:border-b-2 text-center"
+                    type="number" id="width">
+                <p class="p-1 font-bold">X</p>
+                <input
+                    class="w-full outline-none bg-zinc-900 p-1 border-l-4 border-blue-500 rounded-l focus:border-b-2 text-center"
+                    type="number" id="height">
+            </div>
+        </div>
+        <div class="flex flex-col">
+            <label for="dir" class="text-2xl">Mémoria</label>
+            <div class="flex flex-col">
+                <div class="flex flex-col">
+                    <p>Memoria minima</p>
+                    <div id="minPanel">0000</div>
+                    <input type="range" class="w-full accent-blue-500" id="min">
+                </div>
+                <div class="flex flex-col">
+                    <p>Memoria máxima</p>
+                    <div id="maxPanel">0000</div>
+                    <input type="range" class="w-full accent-blue-500" id="max">
+                </div>
+            </div>
+        </div>
+        <div class="flex gap-2">
+            <button class="play-btn" id="salvar"><span class="material-icons mr-2">save</span> Salvar</button>
+            <button class="text-white px-5 py-2 bg-zinc-950 duration-200 mt-5 flex items-center gap-3 hover:bg-zinc-500" id="reset"><span class="material-icons mr-2">feedback</span> Redefinir</button>
+        </div>
+    </div>
+</div>
