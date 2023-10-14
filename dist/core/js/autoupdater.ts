@@ -1,11 +1,10 @@
-import { createWriteStream } from "node:fs";
+import { createWriteStream, readFileSync } from "node:fs";
 import { Events } from "../../interfaces/launcher";
 import semver from "semver"
 import EventEmitter from "events"
 import TypedEmitter from "typed-emitter";
 import decompress from "decompress";
 import { exec } from "node:child_process";
-
 
 class AutoUpdater extends (EventEmitter as new () => TypedEmitter<Events>) {
   constructor() {
@@ -15,11 +14,11 @@ class AutoUpdater extends (EventEmitter as new () => TypedEmitter<Events>) {
   }
 
   checkForUpdates() {
-    console.log("Alou?")
+    const version = JSON.parse(readFileSync("./package.json", "utf-8")).version
     fetch("https://raw.githubusercontent.com/VOTRON157/BRLauncher/main/package.json")
       .then((res) => res.json())
       .then(async (json) => {
-        if (semver.lt(process.env.npm_package_version as string, json.version)) this.emit("update-found")
+        if (semver.lt(version, json.version)) this.emit("update-found")
         else this.emit("update-notavaliable")
       });
   }

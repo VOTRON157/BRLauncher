@@ -25,11 +25,7 @@ console.log('Limpando banco de dados para produção... 🚯');
         exe: config_1.default.app_name,
         name: config_1.default.app_name,
         manufacturer: 'VOTRON157',
-        version: '1.0.3',
-        features: {
-            autoLaunch: false,
-            autoUpdate: true
-        },
+        version: process.env.npm_package_version,
         ui: {
             chooseDirectory: true
         },

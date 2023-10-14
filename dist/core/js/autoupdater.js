@@ -25,11 +25,11 @@ class AutoUpdater extends events_1.default {
         this.checkForUpdates();
     }
     checkForUpdates() {
-        console.log("Alou?");
+        const version = JSON.parse((0, node_fs_1.readFileSync)("./package.json", "utf-8")).version;
         fetch("https://raw.githubusercontent.com/VOTRON157/BRLauncher/main/package.json")
             .then((res) => res.json())
             .then((json) => __awaiter(this, void 0, void 0, function* () {
-            if (semver_1.default.lt(process.env.npm_package_version, json.version))
+            if (semver_1.default.lt(version, json.version))
                 this.emit("update-found");
             else
                 this.emit("update-notavaliable");
