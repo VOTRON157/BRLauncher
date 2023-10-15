@@ -173,6 +173,9 @@ class HomePage extends base_js_1.PageBase {
             autoUpdater.on("finished", () => {
                 this.notification("O BRLauncher foi atualizado para a versão mais recente. Reabra o launcher para ver as novidades.");
             });
+            autoUpdater.on('error', (error) => {
+                console.log(error);
+            });
         });
     }
 }

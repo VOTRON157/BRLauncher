@@ -28,7 +28,14 @@ class AutoUpdater extends events_1.default {
     checkForUpdates() {
         const version = JSON.parse((0, node_fs_1.readFileSync)(path_1.default.join(__dirname, "..", "..", "..", "package.json"), "utf-8")).version;
         console.log(version);
-        fetch("https://raw.githubusercontent.com/VOTRON157/BRLauncher/main/package.json")
+        fetch("https://raw.githubusercontent.com/VOTRON157/BRLauncher/main/package.json", {
+            headers: {
+                'Cache-Control': 'no-cache',
+                'Pragma': 'no-cache',
+                'Expires': '0',
+            },
+            cache: 'no-cache'
+        })
             .then((res) => res.json())
             .then((json) => __awaiter(this, void 0, void 0, function* () {
             if (semver_1.default.lt(version, json.version))
@@ -41,18 +48,43 @@ class AutoUpdater extends events_1.default {
         return __awaiter(this, void 0, void 0, function* () {
             this.emit("downloading-zip");
             const newVersion = "https://github.com/VOTRON157/BRLauncher/archive/refs/heads/main.zip";
-            const data = yield fetch(newVersion);
+            const data = yield fetch(newVersion, {
+                headers: {
+                    'Cache-Control': 'no-cache',
+                    'Pragma': 'no-cache',
+                    'Expires': '0',
+                },
+                cache: 'no-cache'
+            });
             const buffer = Buffer.from(yield (yield data.blob()).arrayBuffer());
-            (0, node_child_process_1.exec)("mkdir updater", () => {
+            (0, node_child_process_1.exec)(`mkdir "${path_1.default.join(__dirname, '..', '..', '..', 'updater')}"`, (error, stdout, stderr) => {
+                if (error)
+                    this.emit("error", error);
+                if (stderr)
+                    this.emit("error", stderr);
                 this.emit("unpacking");
-                const writeStream = (0, node_fs_1.createWriteStream)("updater/brlauncher.zip");
+                const writeStream = (0, node_fs_1.createWriteStream)(path_1.default.join(__dirname, '..', '..', '..', 'updater', 'brlauncher.zip'));
                 writeStream.write(buffer);
                 writeStream.end();
                 writeStream.on("finish", () => {
-                    (0, decompress_1.default)("updater/brlauncher.zip", "updater/brlauncher")
+                    (0, decompress_1.default)(path_1.default.join(__dirname, '..', '..', '..', 'updater', 'brlauncher.zip'), path_1.default.join(__dirname, '..', '..', '..', 'updater', 'brlauncher')) // 💀
                         .then(() => {
                         this.emit("copy");
-                        (0, node_child_process_1.exec)("xcopy updater\\brlauncher\\BRLauncher-main\\* . /E /I /H /Y", () => (0, node_child_process_1.exec)("rd /s /q updater", () => this.emit("finished")));
+                        const updaterPath = path_1.default.join(__dirname, '..', '..', '..', 'updater', 'brlauncher', 'BRLauncher-main', '*');
+                        const root = path_1.default.join(__dirname, '..', '..', '..');
+                        (0, node_child_process_1.exec)(`xcopy "${updaterPath}" "${root}" /E /I /H /Y`, (error, stdout, stderr) => {
+                            if (error)
+                                this.emit("error", error);
+                            if (stderr)
+                                this.emit("error", stderr);
+                            (0, node_child_process_1.exec)(`rd /s /q "${path_1.default.join(__dirname, '..', '..', '..', 'updater')}"`, (error, stdout, stderr) => {
+                                if (error)
+                                    this.emit("error", error);
+                                if (stderr)
+                                    this.emit("error", stderr);
+                                this.emit("finished");
+                            });
+                        });
                     });
                 });
             });

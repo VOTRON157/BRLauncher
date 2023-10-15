@@ -46,20 +46,32 @@ class AutoUpdater extends (EventEmitter as new () => TypedEmitter<Events>) {
     });
     const buffer = Buffer.from(await (await data.blob()).arrayBuffer());
 
-    exec("mkdir updater", () => {
+    exec(`mkdir "${path.join(__dirname, '..', '..', '..', 'updater')}"`, (error, stdout, stderr) => {
+      if (error) this.emit("error", error)
+      if (stderr) this.emit("error", stderr as any)
+
       this.emit("unpacking")
 
-      const writeStream = createWriteStream("updater/brlauncher.zip")
+      const writeStream = createWriteStream(path.join(__dirname, '..', '..', '..', 'updater', 'brlauncher.zip'))
       writeStream.write(buffer)
       writeStream.end()
       writeStream.on("finish", () => {
-        decompress("updater/brlauncher.zip", "updater/brlauncher")
+        decompress(path.join(__dirname, '..', '..', '..', 'updater', 'brlauncher.zip'), path.join(__dirname, '..', '..', '..', 'updater', 'brlauncher')) // 💀
           .then(() => {
             this.emit("copy")
+            const updaterPath = path.join(__dirname, '..', '..', '..', 'updater', 'brlauncher', 'BRLauncher-main', '*')
+            const root = path.join(__dirname, '..', '..', '..')
 
-            exec("xcopy updater\\brlauncher\\BRLauncher-main\\* . /E /I /H /Y", 
-            () => exec("rd /s /q updater",
-            () => this.emit("finished")))
+            exec(`xcopy "${updaterPath}" "${root}" /E /I /H /Y`, (error, stdout, stderr) => {
+              if (error) this.emit("error", error)
+              if (stderr) this.emit("error", stderr as any)
+              exec(`rd /s /q "${path.join(__dirname, '..', '..', '..', 'updater')}"`,
+                (error, stdout, stderr) => {
+                  if (error) this.emit("error", error)
+                  if (stderr) this.emit("error", stderr as any)
+                  this.emit("finished")
+                })
+            })
           })
       })
     })
